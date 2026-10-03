@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 5th Birthday Ishita!</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: #3d3150;
+      background:
+        radial-gradient(circle at 50% -10%, #ffffff 0, #fff7fb 35%, #edf7ff 100%);
+      overflow-x: hidden;
+    }
+
+    .hero {
+      min-height: 100vh;
+      text-align: center;
+      padding: 70px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .crown {
+      font-size: 55px;
+      color: #f2b84b;
+      margin-bottom: 10px;
+    }
+
+    .small-title {
+      color: #a176b8;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    h1 {
+      font-size: clamp(45px, 8vw, 90px);
+      line-height: 1;
+      margin: 15px 0;
+      color: #42334f;
+    }
+
+    h1 span {
+      color: #ec7ca7;
+    }
+
+    .subtitle {
+      font-size: 19px;
+      color: #74677e;
+      max-width: 650px;
+      line-height: 1.6;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .time-box {
+      width: 125px;
+      padding: 22px 10px;
+      background: white;
+      border: 2px solid #f0ddec;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(100, 70, 120, 0.12);
+    }
+
+    .time-box strong {
+      display: block;
+      font-size: 43px;
+      color: #7954a5;
+    }
+
+    .time-box small {
+      color: #9b899f;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    .music-button {
+      margin-top: 30px;
+      border: none;
+      border-radius: 999px;
+      background: #7b59a8;
+      color: white;
+      padding: 14px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(123, 89, 168, 0.25);
+    }
+
+    .music-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .message {
+      max-width: 850px;
+      margin: 0 auto 80px;
+      padding: 50px;
+      text-align: center;
+      background: white;
+      border: 2px solid #f0ddec;
+      border-radius: 35px;
+      box-shadow: 0 25px 60px rgba(100, 70, 120, 0.12);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #ffe1ec;
+      color: #b35d80;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .message h2,
+    .memories h2 {
+      font-size: 40px;
+      color: #4c385d;
+      margin-bottom: 15px;
+    }
+
+    .message p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #75687c;
+    }
+
+    .heart {
+      color: #e87ca4;
+      font-size: 40px;
+      margin-top: 15px;
+    }
+
+    .memories {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px 90px;
+      text-align: center;
+    }
+
+    .memories h2 {
+      margin-top: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .photo {
+      background: white;
+      padding: 10px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(100, 70, 120, 0.12);
+      transform: rotate(-1deg);
+    }
+
+    .photo:nth-child(even) {
+      transform: rotate(1deg);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      border-radius: 18px;
+      background: #f5edf8;
+    }
+
+    .photo figcaption {
+      padding: 12px;
+      color: #806b8b;
+      font-weight: bold;
+    }
+
+    .birthday {
+      display: none;
+      text-align: center;
+    }
+
+    .birthday.show {
+      display: block;
+    }
+
+    .birthday .cake {
+      font-size: 90px;
+    }
+
+    .birthday h2 {
+      color: #e16f9c;
+      font-size: clamp(35px, 6vw, 65px);
+      margin: 10px;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 100;
+      text-align: center;
+      font-size: 35px;
+      padding: 20px;
+      display: none;
+    }
+
+    .confetti.show {
+      display: block;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(20px);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #9a8ca1;
+      font-size: 14px;
+    }
+
+    @media (max-width: 750px) {
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .message {
+        margin: 0 15px 60px;
+        padding: 30px 20px;
+      }
+
+      .time-box {
+        width: 100px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 45px 15px;
+      }
+
+      .time-box {
+        width: 85px;
+      }
+
+      .time-box strong {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="confetti" id="confetti">
+    🎉 ✨ 🎈 🎊 ✨ 🎉 🎈 🎊 ✨ 🎉
+  </div>
+
+  <section class="hero">
+
+    <div class="crown">♕</div>
+
+    <div class="small-title">
+      A SPECIAL DAY IS ALMOST HERE
+    </div>
+
+    <h1>
+      Ishita is turning <span>5!</span>
+    </h1>
+
+    <p class="subtitle" id="subtitle">
+      The countdown to Ishita's big birthday has begun!
+    </p>
+
+    <div class="countdown" id="countdown">
+
+      <div class="time-box">
+        <strong id="days">00</strong>
+        <small>Days</small>
+      </div>
+
+      <div class="time-box">
+        <strong id="hours">00</strong>
+        <small>Hours</small>
+      </div>
+
+      <div class="time-box">
+        <strong id="minutes">00</strong>
+        <small>Minutes</small>
+      </div>
+
+      <div class="time-box">
+        <strong id="seconds">00</strong>
+        <small>Seconds</small>
+      </div>
+
+    </div>
+
+    <div class="birthday" id="birthday">
+
+      <div class="cake">🎂</div>
+
+      <h2>
+        HAPPY 5TH BIRTHDAY, ISHITA!
+      </h2>
+
+      <p>
+        Today is your special day! Have the best birthday ever!
+      </p>
+
+    </div>
+
+    <button class="music-button" id="musicButton">
+      ▶ Play Birthday Music
+    </button>
+
+    <audio id="birthdayMusic" loop>
+      <source
+        src="01-Monk-Turner-Fascinoma-Its-Your-Birthday(chosic.com).mp3.crdownload"
+        type="audio/mpeg"
+      >
+    </audio>
+
+  </section>
+
+
+  <section class="message">
+
+    <div class="tag">
+      A MESSAGE FOR ISHITA
+    </div>
+
+    <h2>
+      Happy 5th Birthday!
+    </h2>
+
+    <p>
+      Wishing you the happiest birthday ever, Ishita!
+      May your special day be filled with lots of laughter,
+      fun, yummy cake, big smiles and amazing memories.
+      Have an absolutely wonderful 5th birthday!
+    </p>
+
+    <div class="heart">
+      ♡
+    </div>
+
+  </section>
+
+
+  <section class="memories">
+
+    <div class="small-title">
+      FIVE YEARS OF
+    </div>
+
+    <h2>
+      Beautiful Memories
+    </h2>
+
+    <p>
+      Some special moments with Ishita.
+    </p>
+
+    <div class="gallery">
+
+      <figure class="photo">
+        <img src="photos/AAHR5254.JPG" alt="Ishita memory 1">
+        <figcaption>Memory 1</figcaption>
+      </figure>
+
+      <figure class="photo">
+        <img src="photos/CTSY5997.JPG" alt="Ishita memory 2">
+        <figcaption>Memory 2</figcaption>
+      </figure>
+
+      <figure class="photo">
+        <img src="photos/BEQD3303.JPG" alt="Ishita memory 3">
+        <figcaption>Memory 3</figcaption>
+      </figure>
+
+      <figure class="photo">
+        <img src="photos/VGHT6966.JPG" alt="Ishita memory 4">
+        <figcaption>Memory 4</figcaption>
+      </figure>
+
+      <figure class="photo">
+        <img src="photos/TZZE5630.JPG" alt="Ishita memory 5">
+        <figcaption>Memory 5</figcaption>
+      </figure>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+    Made with love for Ishita · 4 October 2026
+  </footer>
+
+
+  <script>
+
+    // Queensland birthday time:
+    // 4 October 2026 at midnight
+    const birthday = new Date("2026-10-04T00:00:00+10:00").getTime();
+
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+    const countdown = document.getElementById("countdown");
+    const birthdayMessage = document.getElementById("birthday");
+    const confetti = document.getElementById("confetti");
+    const subtitle = document.getElementById("subtitle");
+
+    function updateCountdown() {
+
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      if (distance <= 0) {
+
+        countdown.style.display = "none";
+
+        birthdayMessage.classList.add("show");
+
+        subtitle.textContent =
+          "Today is Ishita's special day!";
+
+        confetti.classList.add("show");
+
+        return;
+      }
+
+      const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+      );
+
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+      );
+
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+      );
+
+      const seconds = Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+      );
+
+      daysElement.textContent = String(days).padStart(2, "0");
+      hoursElement.textContent = String(hours).padStart(2, "0");
+      minutesElement.textContent = String(minutes).padStart(2, "0");
+      secondsElement.textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+
+    // Music button
+    const musicButton = document.getElementById("musicButton");
+    const music = document.getElementById("birthdayMusic");
+
+    musicButton.addEventListener("click", function () {
+
+      if (music.paused) {
+
+        music.play();
+
+        musicButton.textContent =
+          "❚❚ Pause Birthday Music";
+
+      } else {
+
+        music.pause();
+
+        musicButton.textContent =
+          "▶ Play Birthday Music";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
